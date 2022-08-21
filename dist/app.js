@@ -8,3 +8,14 @@ addBtnElement.addEventListener("click", () => {
     resultLbl.textContent = sum.toString();
     console.log(sum.toString());
 });
+const buyBtnElement = document.querySelector("#buyBtn");
+const buyPriceElement = document.querySelector("#buyPrice");
+const calculatePrice = (originalPrice, hasDiscount) => {
+    return hasDiscount ? originalPrice * 0.7 : originalPrice;
+};
+buyBtnElement.addEventListener("click", () => {
+    const originalPrice = 193;
+    const hasDiscount = new URLSearchParams(window.location.search).get("discount") === "true";
+    const price = calculatePrice(originalPrice, hasDiscount);
+    buyPriceElement.textContent = price.toString();
+});
