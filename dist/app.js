@@ -6,4 +6,5 @@ const add = (a, b) => a + b;
 addBtnElement.addEventListener("click", () => {
     const sum = add(input1.valueAsNumber, input2.valueAsNumber);
     resultLbl.textContent = sum.toString();
+    console.log(sum.toString());
 });
