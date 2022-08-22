@@ -5,23 +5,23 @@ const resultLbl = document.querySelector("#result")
 
 const add = (a: number, b: number) => a + b
 
-addBtnElement.addEventListener("click", ()=>{
+addBtnElement.addEventListener("click", () => {
     const sum = add(input1.valueAsNumber, input2.valueAsNumber)
     resultLbl.textContent = sum.toString()
     console.log(sum.toString())
-    }
+}
 )
 
 const buyBtnElement = document.querySelector("#buyBtn")
 const buyPriceElement = document.querySelector("#buyPrice")
-const calculatePrice = (originalPrice: number ,  hasDiscount: boolean) => {
-    return hasDiscount ? originalPrice*0.7 : originalPrice
+const calculatePrice = (originalPrice: number, hasDiscount: boolean) => {
+    return hasDiscount ? originalPrice * 0.7 : originalPrice
 }
 
-buyBtnElement.addEventListener("click", () =>{
+buyBtnElement.addEventListener("click", () => {
     const originalPrice = 193
-    const hasDiscount : boolean= new URLSearchParams(window.location.search).get("discount") === "true"
-    const price = calculatePrice(originalPrice, hasDiscount )
+    const hasDiscount: boolean = new URLSearchParams(window.location.search).get("discount") === "true"
+    const price = calculatePrice(originalPrice, hasDiscount)
     buyPriceElement.textContent = price.toString()
 
 }
