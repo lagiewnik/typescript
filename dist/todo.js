@@ -44,6 +44,8 @@ addTask({ title: "cypress", done: false, category: "work" });
 render();
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault(); //zapobieganie wysłania formularza
-    addTask({ title: taskNameInputElement.value, done: false });
+    const selectedRadioElement = document.querySelector("input[type='radio']:checked");
+    const selectedCategory = selectedRadioElement.value;
+    addTask({ title: taskNameInputElement.value, done: false, category: selectedCategory });
     render();
 });

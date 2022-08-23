@@ -15,13 +15,14 @@ const taskB : Task = {
 }
 const tasks: Task [] = [taskA, taskB];
 
+type Category = "testing"|"work"| "poker"|  "general" |"hobby"
 interface Task {
     title: string;
     done: boolean;
-    category?: "testing"|"work"| "poker"|  "general" |"hobby"//optional property + literal type
+    category?: Category //optional property + literal type
 }
 
-const categories: string[] = ["testing", "work", "poker",  "general"]
+const categories: Category[] = ["testing", "work", "poker",  "general"]
 
 const render = () => {
     tasksContainerElement.innerHTML = ""
@@ -60,6 +61,9 @@ render()
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault() //zapobieganie wysłania formularza
-    addTask({title:  taskNameInputElement.value, done:false});
+    const selectedRadioElement: HTMLInputElement = document.querySelector("input[type='radio']:checked")
+    const selectedCategory: Category = selectedRadioElement.value as Category;
+
+    addTask({title:  taskNameInputElement.value, done:false, category: selectedCategory});
     render()
 })
