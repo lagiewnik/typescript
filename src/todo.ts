@@ -3,20 +3,33 @@ const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 const taskNameInputElement: HTMLInputElement = document.querySelector("#name")
 const addButtonElement: HTMLElement = document.querySelector("button")
 
-const task : Task= {
-    title: "pies",
-    done: true
+const taskA : Task= {
+    title: "vbrake",
+    done: true,
+    category: "hobby"
 }
-const tasks: Task [] = [task];
+const taskB : Task = {
+    title: "3BET analise",
+    done: false,
+    category : "poker"
+}
+const tasks: Task [] = [taskA, taskB];
 
 interface Task {
     title: string;
-    done: boolean
+    done: boolean;
+    category?: string //optional property
 }
+
+const categories: string[] = ["testing", "work", "poker",  "general"]
+
 const render = () => {
     tasksContainerElement.innerHTML = ""
     tasks.forEach((element, index) => {
         const taskElement: HTMLElement = document.createElement("li")
+        if(element.category){
+            taskElement.classList.add(element.category)
+        }
         const id : string= `task-${index}`;
 
         const labelElement: HTMLLabelElement = document.createElement("label");
