@@ -3,15 +3,16 @@ const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 const taskNameInputElement: HTMLInputElement = document.querySelector("#name")
 const addButtonElement: HTMLElement = document.querySelector("button")
 
-const task = {
-    name: "pies",
+const task : Task= {
+    title: "pies",
     done: true
 }
-const tasks: {
-    name: string;
-    done: boolean;
-}[] = [task];
+const tasks: Task [] = [task];
 
+interface Task {
+    title: string;
+    done: boolean
+}
 const render = () => {
     tasksContainerElement.innerHTML = ""
     tasks.forEach((element, index) => {
@@ -19,12 +20,12 @@ const render = () => {
         const id : string= `task-${index}`;
 
         const labelElement: HTMLLabelElement = document.createElement("label");
-        labelElement.innerText = element.name;
+        labelElement.innerText = element.title;
         labelElement.setAttribute("for", id)
 
         const checkboxElement: HTMLInputElement = document.createElement("input")
         checkboxElement.type = "checkbox";
-        checkboxElement.name = element.name
+        checkboxElement.name = element.title
         checkboxElement.id = id
         checkboxElement.checked = element.done
         checkboxElement.addEventListener("change", ()=>{
@@ -39,12 +40,12 @@ const render = () => {
 
 render()
 
-const addTask = (taskName: string) => {
-    tasks.push({name: taskName, done:  false})
+const addTask = (task: Task) => {
+    tasks.push(task)
 }
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault() //zapobieganie wysłania formularza
-    addTask(taskNameInputElement.value);
+    addTask({title:  taskNameInputElement.value, done:false});
     render()
 })

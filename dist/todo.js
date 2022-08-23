@@ -2,7 +2,7 @@ const tasksContainerElement = document.querySelector(".tasks");
 const taskNameInputElement = document.querySelector("#name");
 const addButtonElement = document.querySelector("button");
 const task = {
-    name: "pies",
+    title: "pies",
     done: true
 };
 const tasks = [task];
@@ -12,11 +12,11 @@ const render = () => {
         const taskElement = document.createElement("li");
         const id = `task-${index}`;
         const labelElement = document.createElement("label");
-        labelElement.innerText = element.name;
+        labelElement.innerText = element.title;
         labelElement.setAttribute("for", id);
         const checkboxElement = document.createElement("input");
         checkboxElement.type = "checkbox";
-        checkboxElement.name = element.name;
+        checkboxElement.name = element.title;
         checkboxElement.id = id;
         checkboxElement.checked = element.done;
         checkboxElement.addEventListener("change", () => {
@@ -28,11 +28,11 @@ const render = () => {
     });
 };
 render();
-const addTask = (taskName) => {
-    tasks.push({ name: taskName, done: false });
+const addTask = (task) => {
+    tasks.push(task);
 };
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault(); //zapobieganie wysłania formularza
-    addTask(taskNameInputElement.value);
+    addTask({ title: taskNameInputElement.value, done: false });
     render();
 });
