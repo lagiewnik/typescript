@@ -18,7 +18,7 @@ const tasks: Task [] = [taskA, taskB];
 interface Task {
     title: string;
     done: boolean;
-    category?: string //optional property
+    category?: "testing"|"work"| "poker"|  "general" |"hobby"//optional property + literal type
 }
 
 const categories: string[] = ["testing", "work", "poker",  "general"]
@@ -50,12 +50,13 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement)
     });
 }
-
-render()
-
 const addTask = (task: Task) => {
     tasks.push(task)
 }
+addTask({title: "cypress", done: false, category: "work"})
+render()
+
+
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault() //zapobieganie wysłania formularza

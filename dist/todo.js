@@ -37,10 +37,11 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement);
     });
 };
-render();
 const addTask = (task) => {
     tasks.push(task);
 };
+addTask({ title: "cypress", done: false, category: "work" });
+render();
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault(); //zapobieganie wysłania formularza
     addTask({ title: taskNameInputElement.value, done: false });
