@@ -1,6 +1,7 @@
 import {renderCategories} from "./helpers/render-categories.helper.js";
 import {render} from "./helpers/render-tasks.helper.js";
 import {Category, Task} from "./types/types.js";
+import {TaskClass} from "./classes/task.js";
 
 const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 
@@ -9,16 +10,8 @@ const addButtonElement: HTMLElement = document.querySelector("button")
 const categoriesContainerElement: HTMLElement = document.querySelector(".categories")
 let selectedCategory: Category;
 
-const taskA : Task= {
-    title: "vbrake",
-    done: true, 
-    category: Category.HOBBY
-}
-const taskB : Task = {
-    title: "3BET analise",
-    done: false,
-    category : Category.POKER
-}
+const taskA = new Task("vbrake", false, Category.HOBBY)
+const taskB = new Task("3BET ", false, Category.POKER)
 
 type taskAsTuple = [string, Category, boolean ]
 const taskC : taskAsTuple = ["cBET", Category.POKER, false ]
@@ -33,20 +26,22 @@ const addTask = (task: Task) => {
     console.log(task)
 }
 
-addTask({title: taskC[0], done: taskC[2], category: taskC[1]})
+addTask(new Task(taskC[0], taskC[2], taskC[1]))
 const updateSelectedCategory = (newCategory: Category) => {
     selectedCategory = newCategory
 }
 
-addTask({title: "cypress", done: false, category: Category.WORK})
+
 render(tasks, tasksContainerElement)
 renderCategories(categories, categoriesContainerElement, updateSelectedCategory )
 console.log("11111"+ selectedCategory)
 
+const taskClass = new TaskClass("Konstrukcje", false);
+//console.log((taskClass))
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault() //zapobieganie wysłania formularza
-    addTask({title:  taskNameInputElement.value, done:false, category: selectedCategory});
+    addTask(new Task(taskNameInputElement.value, false, selectedCategory));
     console.log(selectedCategory)
     render(tasks, tasksContainerElement)
 })

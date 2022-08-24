@@ -1,10 +1,6 @@
-// export interface Task {
-//     title: string;
-//     done: boolean;
-//     category?: Category //optional property + literal type
-// }
+import {Category} from "../types/types.js";
 
-export class Task {
+export class TaskClass {
     title: string = "New challenge"
     private done: boolean = false;
     category?: Category;
@@ -23,11 +19,5 @@ export class Task {
         console.log(`Task created ${this.createdAt}`)
     }
 }
-//export type Category = "hobby"|"work"| "poker"|  "general" |"hobby"
 
-export enum Category {
-    GENERAL = 'general',
-    WORK = 'work',
-    POKER = 'poker',
-    HOBBY = 'hobby'
-}
+//const task = new TaskClass()
