@@ -9,7 +9,7 @@ const handleCategoryChange = (category) => {
         document.body.style.background = "blue";
     }
     else if (category === "hobby") {
-        document.body.style.background = "green";
+        document.body.style.background = "black";
     }
     else {
         console.log("nigdy sie nie wyswietli");

@@ -1,4 +1,4 @@
-import { Category } from "../types/types"
+import { Category } from "../types/types.js"
 
 const handleCategoryChange = (category: Category) => {
     if (category === 'general') {
@@ -8,7 +8,7 @@ const handleCategoryChange = (category: Category) => {
     } else if (category === "work") {
         document.body.style.background = "blue"
     } else if (category === "hobby") {
-        document.body.style.background = "green"
+        document.body.style.background = "black"
     }
     else {
         console.log("nigdy sie nie wyswietli")
@@ -39,3 +39,4 @@ export const renderCategories = (categories: Category[], categoriesContainerElem
         categoriesContainerElement.appendChild(labelElement)
     })
 }
+
