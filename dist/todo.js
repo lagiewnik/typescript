@@ -1,6 +1,8 @@
 const tasksContainerElement = document.querySelector(".tasks");
 const taskNameInputElement = document.querySelector("#name");
 const addButtonElement = document.querySelector("button");
+const categoriesContainerElement = document.querySelector(".categories");
+let selectedCategory;
 const taskA = {
     title: "vbrake",
     done: true,
@@ -12,7 +14,7 @@ const taskB = {
     category: "poker"
 };
 const tasks = [taskA, taskB];
-const categories = ["testing", "work", "poker", "general"];
+const categories = ["hobby", "work", "poker", "general"];
 const render = () => {
     tasksContainerElement.innerHTML = "";
     tasks.forEach((element, index) => {
@@ -37,15 +39,33 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement);
     });
 };
+const renderCategories = () => {
+    categories.forEach(category => {
+        const categoryElement = document.createElement("li");
+        const radioInputElement = document.createElement("input");
+        radioInputElement.type = "radio";
+        radioInputElement.name = "category";
+        radioInputElement.value = category;
+        radioInputElement.id = `category-${category}`;
+        radioInputElement.addEventListener("change", () => {
+            selectedCategory = category;
+        });
+        const labelElement = document.createElement("label");
+        labelElement.setAttribute("for", `category-${category}`);
+        labelElement.innerText = category;
+        categoriesContainerElement.appendChild(categoryElement);
+        categoriesContainerElement.appendChild(radioInputElement);
+        categoriesContainerElement.appendChild(labelElement);
+    });
+};
 const addTask = (task) => {
     tasks.push(task);
 };
 addTask({ title: "cypress", done: false, category: "work" });
 render();
+renderCategories();
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault(); //zapobieganie wysłania formularza
-    const selectedRadioElement = document.querySelector("input[type='radio']:checked");
-    const selectedCategory = selectedRadioElement.value;
     addTask({ title: taskNameInputElement.value, done: false, category: selectedCategory });
     render();
 });

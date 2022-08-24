@@ -2,6 +2,8 @@ const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 
 const taskNameInputElement: HTMLInputElement = document.querySelector("#name")
 const addButtonElement: HTMLElement = document.querySelector("button")
+const categoriesContainerElement: HTMLElement = document.querySelector(".categories")
+let selectedCategory: Category;
 
 const taskA : Task= {
     title: "vbrake",
@@ -15,14 +17,14 @@ const taskB : Task = {
 }
 const tasks: Task [] = [taskA, taskB];
 
-type Category = "testing"|"work"| "poker"|  "general" |"hobby"
+type Category = "hobby"|"work"| "poker"|  "general" |"hobby"
 interface Task {
     title: string;
     done: boolean;
     category?: Category //optional property + literal type
 }
 
-const categories: Category[] = ["testing", "work", "poker",  "general"]
+const categories: Category[] = ["hobby", "work", "poker",  "general"]
 
 const render = () => {
     tasksContainerElement.innerHTML = ""
@@ -51,19 +53,43 @@ const render = () => {
         tasksContainerElement.appendChild(taskElement)
     });
 }
+
+const renderCategories = () => {
+
+    categories.forEach(category => {
+        const categoryElement: HTMLElement = document.createElement("li")
+        const radioInputElement: HTMLInputElement = document.createElement("input")
+        radioInputElement.type="radio"
+        radioInputElement.name = "category"
+        radioInputElement.value = category
+        radioInputElement.id =`category-${category}`
+        radioInputElement.addEventListener("change", ()=>{
+            selectedCategory = category
+        })
+
+        const labelElement: HTMLLabelElement = document.createElement("label")
+        labelElement.setAttribute("for",`category-${category}` )
+        labelElement.innerText = category
+
+        categoriesContainerElement.appendChild(categoryElement)
+        categoriesContainerElement.appendChild(radioInputElement)
+        categoriesContainerElement.appendChild(labelElement)
+    })
+}
+
 const addTask = (task: Task) => {
     tasks.push(task)
 }
 addTask({title: "cypress", done: false, category: "work"})
 render()
+renderCategories()
 
 
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault() //zapobieganie wysłania formularza
-    const selectedRadioElement: HTMLInputElement = document.querySelector("input[type='radio']:checked")
-    const selectedCategory: Category = selectedRadioElement.value as Category;
-
     addTask({title:  taskNameInputElement.value, done:false, category: selectedCategory});
     render()
 })
+
+
