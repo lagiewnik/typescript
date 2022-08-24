@@ -19,6 +19,11 @@ const taskB : Task = {
     done: false,
     category : Category.POKER
 }
+
+type taskAsTuple = [string, Category, boolean ]
+const taskC : taskAsTuple = ["cBET", Category.POKER, false ]
+
+
 const tasks: Task [] = [taskA, taskB];
 
 const categories: Category[] = [Category.HOBBY, Category.WORK, Category.POKER,  Category.GENERAL]
@@ -28,6 +33,7 @@ const addTask = (task: Task) => {
     console.log(task)
 }
 
+addTask({title: taskC[0], done: taskC[2], category: taskC[1]})
 const updateSelectedCategory = (newCategory: Category) => {
     selectedCategory = newCategory
 }

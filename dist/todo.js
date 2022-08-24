@@ -16,12 +16,14 @@ const taskB = {
     done: false,
     category: Category.POKER
 };
+const taskC = ["cBET", Category.POKER, false];
 const tasks = [taskA, taskB];
 const categories = [Category.HOBBY, Category.WORK, Category.POKER, Category.GENERAL];
 const addTask = (task) => {
     tasks.push(task);
     console.log(task);
 };
+addTask({ title: taskC[0], done: taskC[2], category: taskC[1] });
 const updateSelectedCategory = (newCategory) => {
     selectedCategory = newCategory;
 };
